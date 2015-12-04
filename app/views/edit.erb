@@ -1,0 +1,15 @@
+<a class="btn btn-primary btn-lg active" role="button" href="/robots">Robot Index</a>
+<a class="btn btn-warning btn-lg active" role="button" href="/">Robot World</a>
+
+<h1 class="text-center">Editing a Robot</h1>
+
+<form action="/robots/<%= @robot.name %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="robot[name]" value="<%= @robot.name %>"/><br/>
+  <input type="text" name="robot[city]" value="<%= @robot.city %>"/><br/>
+  <input type="text" name="robot[state]" value="<%= @robot.state %>"/><br/>
+  <input type="text" name="robot[birthdate]" value="<%= @robot.birthdate %>"/><br/>
+  <input type="text" name="robot[date_hired]" value="<%= @robot.date_hired %>"/><br/>
+  <input type="text" name="robot[department]" value="<%= @robot.department %>"/><br/>
+  <input class="btn btn-info" type='submit'/>
+</form>

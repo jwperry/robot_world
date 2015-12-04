@@ -1,0 +1,8 @@
+---
+robots:
+- name: bender bending rodriguez
+  city: Tijuana
+  state: Mexico
+  birthdate: 12/31/2999
+  date_hired: 01/01/3000
+  department: Bending

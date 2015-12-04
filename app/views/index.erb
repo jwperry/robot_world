@@ -1,0 +1,13 @@
+<a class="btn btn-primary btn-lg active" role="button" href="/robots">Robot Index</a>
+<a class="btn btn-warning btn-lg active" role="button" href="/">Robot World</a>
+
+<h1 class="text-center">All Robots</h1>
+
+<% @robots.each do |robot| %>
+  <h3 class="bg-info col-md-12"><%= robot.name %>: <a href="/robots/<%= robot.name %>"><%= robot.name %></a></h3>
+  <a href="/robots/<%= robot.name %>/edit">Edit</a>
+  <form action="/robots/<%= robot.name %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+<% end %>
