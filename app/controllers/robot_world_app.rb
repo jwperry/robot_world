@@ -1,4 +1,5 @@
 require './app/models/robot_world'
+require './app/models/robot'
 
 class RobotWorldApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)

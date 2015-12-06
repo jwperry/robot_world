@@ -1,64 +1,41 @@
-require 'yaml/store'
-require_relative 'robot'
-
 class RobotWorld
   def self.database
-    @database ||= YAML::Store.new("db/robot_world")
+    if ENV["RACK_ENV"] == "test"
+      @database ||= Sequel.sqlite("db/robot_world_test.sqlite3")
+    else
+      @database ||= Sequel.sqlite("db/robot_world_development.sqlite3")
+    end
   end
 
   def self.create(robot)
-    database.transaction do
-      database['robots'] ||= []
-      database['robots'] << {:name => robot[:name],
-                             :city => robot[:city],
-                             :state => robot[:state],
-                             :birthdate => robot[:birthdate],
-                             :date_hired => robot[:date_hired],
-                             :department => robot[:department]
-                            }
-    end
-  end
-
-  def self.raw_robots
-    database.transaction do
-      database['robots'] || []
-    end
+    dataset.insert(robot)
   end
 
   def self.all
-    raw_robots.map { |data| Robot.new(data) }
-  end
-
-  def self.raw_robot(name)
-    raw_robots.find { |robot| robot[:name] == name }
+    robots = dataset.to_a
+    robots.map { |data| Robot.new(data) }
   end
 
   def self.find(name)
-    Robot.new(raw_robot(name))
+    robot = dataset.where(:name => name).to_a.first
+    Robot.new(robot)
   end
 
-  def self.update(name, robot)
-    database.transaction do
-      target = database['robots'].find { |data| data[:name] == name }
-      target[:name] = robot[:name]
-      target[:city] = robot[:city]
-      target[:state] = robot[:state]
-      target[:birthdate] = robot[:birthdate]
-      target[:date_hired] = robot[:date_hired]
-      target[:department] = robot[:department]
-    end
+  def self.update(name, robot_data)
+    robot = dataset.where(:name => name)
+    robot.update(robot_data)
   end
 
   def self.delete(name)
-    database.transaction do
-      database['robots'].delete_if { |robot| robot[:name] == name }
-    end
+    dataset.where(:name => name).delete
   end
 
   def self.delete_all
-    database.transaction do
-      database['robots'] = []
-    end
+    dataset.from(:robots).delete
+  end
+
+  def self.dataset
+    database.from(:robots)
   end
 
 end
