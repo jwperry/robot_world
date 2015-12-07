@@ -1,6 +1,6 @@
-<h1 class="text-center">Editing a Robot</h1>
+<h1 class="text-center white-text">Editing a Robot</h1>
 
-<form action="/robots/<%= @robot.name %>" method="post">
+<form class="white-text" action="/robots/<%= @robot.name %>" method="post">
   <input type="hidden" name="_method" value="put">
   <input type="text" name="robot[name]" value="<%= @robot.name %>"/><br/>
   <input type="text" name="robot[city]" value="<%= @robot.city %>"/><br/>

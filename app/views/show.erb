@@ -1,6 +1,33 @@
-<h1 class="text-capitalize"><%= @robot.name %></h1>
-<h1><%= @robot.city %></h1>
-<h1><%= @robot.state %></h1>
-<h1><%= @robot.birthdate %></h1>
-<h1><%= @robot.date_hired %></h1>
-<h1><%= @robot.department %></h1>
+<div style="margin-top: 60px;">
+  <div class="card teal lighten-4">
+    <div class="card-content black-text">
+      <div class="row">
+        <div class="col s12 m6">
+          <img src="https://robohash.org/<%=@robot.name%>.png" style="width: 80%; margin-bottom: 30px;">
+        </div>
+        <div style="vertical-align: bottom;">
+          <div class="col s12 m6">
+            <h4 class="text-capitalize">Name: <%= @robot.name %></h4>
+            <h4 class="text-capitalize">City: <%= @robot.city %></h4>
+            <h4 class="text-capitalize">State: <%= @robot.state %></h4>
+            <h4 class="text-capitalize">Birthdate: <%= @robot.birthdate %></h4>
+            <h4 class="text-capitalize">Date Hired: <%= @robot.date_hired %></h4>
+            <h4 class="text-capitalize">Department: <%= @robot.department %></h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="center-align">
+          <div style="margin-bottom: 15px;">
+            <a href="/robots/<%= @robot.name %>/edit" class="waves-effect waves-light btn">Edit</a>
+          </div>
+          <form action="/robots/<%= @robot.name %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input name="delete_robot_button" type="submit" class="waves-effect waves-light btn" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

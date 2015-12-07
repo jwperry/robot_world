@@ -1,20 +1,26 @@
-<h1 class="text-center">All Robots</h1>
+<h1 class="text-center white-text">All Robots</h1>
 
 <div id="robot_index" class="row">
   <% @robots.each do |robot| %>
     <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
+      <div class="card teal lighten-4">
         <div class="card-content white-text">
-          <img src="https://robohash.org/<%=robot.name%>.png" style="width: 100%;">
+          <a href="/robots/<%= robot.name %>"><img src="https://robohash.org/<%=robot.name%>.png" style="width: 100%;"></a>
           <div class="row">
-            <a href="/robots/<%= robot.name %>"><%= robot.name %></a>
+            <h3 class="center-align">
+              <a class="black-text text-darken-3" href="/robots/<%= robot.name %>"><i class="material-icons">android</i>  <%= robot.name %>  <i class="material-icons">android</i></a>
+            </h3>
           </div>
           <div class="row">
-            <a href="/robots/<%= robot.name %>/edit" class="waves-effect waves-light btn">Edit</a>
-            <form action="/robots/<%= robot.name %>" method="post" class="col m6" style="width: 150px; margin: 0px 10px 0px 10px;">
-              <input type="hidden" name="_method" value="delete">
-              <input name="delete_robot_button" type="submit" class="waves-effect waves-light btn" value="Delete">
-            </form>
+            <div class="center-align">
+              <div style="margin-bottom: 15px;">
+                <a href="/robots/<%= robot.name %>/edit" class="waves-effect waves-light btn">Edit</a>
+              </div>
+              <form action="/robots/<%= robot.name %>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input name="delete_robot_button" type="submit" class="waves-effect waves-light btn" value="Delete">
+              </form>
+            </div>
           </div>
         </div>
       </div>
